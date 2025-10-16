@@ -1,10 +1,21 @@
     device zxspectrum48,$7FFF
 
+    DEFINE NO_LORES_FLAG        ; comment this to build special version of test
+        ; the special version will switch part of screen to LoRes 128x96 mode
+        ; and have there few stripes of color $87 which is modified by copper
+        ; to draw flags also in ULA layer, so the first flag at [1,64] is then
+        ; drawn at LoRes pixel, but palette changes have half-width granularity
+        ; Also flag has few half-width pixel stripes to make it well visible,
+        ; that palette updates are half-width "live" 4x per LoRes pixel
+
     org     $8000
 
     INCLUDE "../../Constants.asm"
     INCLUDE "../../Macros.asm"
     INCLUDE "../../TestFunctions.asm"
+    IFNDEF NO_LORES_FLAG
+        INCLUDE "../../TestData.asm"
+    ENDIF
     INCLUDE "../../OutputFunctions.asm"
 
 LegendText:
@@ -19,6 +30,7 @@ CopperBytesTxt2:
     db      'Read back from registers: ',0
 
 FlagData:
+    IFDEF NO_LORES_FLAG
     db      %00000110,%00000000     ; 5:2:9 - blue, yellow, blue
     db      %00000110,%00000000
     db      %00000110,%00000000
@@ -29,6 +41,18 @@ FlagData:
     db      %00000110,%00000000
     db      %00000110,%00000000
     db      %00000110,%00000000
+    ELSE
+    db      %01010110,%00101010     ; 5:2:9 - blue, yellow, blue
+    db      %01010110,%00010101
+    db      %01010110,%00101010
+    db      %01010110,%00000000
+    db      %11111111,%11111111     ; lines are 4:2:4, middle is full yellow
+    db      %11111111,%11111111
+    db      %00000110,%00000000
+    db      %00000110,%00000000
+    db      %00000110,%00000000
+    db      %00000110,%00000000
+    ENDIF
 
     ; 8 bit colour definitions
 C_BLACK     equ     $00
@@ -79,6 +103,14 @@ Start:
     ld      hl,MEM_ZX_SCREEN_4000+16*256+32-8   ; BELOW end of second VRAM third
     call    FillSomeUlaLines
 
+    IFNDEF NO_LORES_FLAG
+        ; set LoRes VRAM at [0,64] -> [40,72] with color $87 (20x4 lores pixels -> 40x8 ULA pixels area)
+        FILL_AREA $4000+128*32, 20, $87
+        FILL_AREA $4000+128*33, 20, $87
+        FILL_AREA $4000+128*34, 20, $87
+        FILL_AREA $4000+128*35, 20, $87
+    ENDIF
+
     ; set up ULANext mode and reset palette (BORDER is already 7 from StartTest)
     ; auto-increment OFF, select first ULA palette, UlaNext ON
     NEXTREG PALETTE_CONTROL_NR_43, %10000001
@@ -108,11 +140,38 @@ Start:
     push    iy
     ld      iy,0        ; count total instructions
 
+    IFNDEF NO_LORES_FLAG    ; special variant of test -> switch to LoRes mode
+        ; WAIT l=60,h=16
+        ld      de,+(COPPER_WAIT_H<<8)+(16<<9)+60
+        out     (c),d
+        out     (c),e
+        inc     iy
+        ; MOVE SPRITE_CONTROL_NR_15, $80 ; enable LoRes
+        ld      hl,+(SPRITE_CONTROL_NR_15<<8)+$80
+        out     (c),h
+        out     (c),l
+        inc     iy
+    ENDIF
+
     ; now fill up the flag-drawing instructions (5 flags ~= 990 instructions (!))
     ld      de,$0140    ; [1,64]    ; this one should be +1px off from ruler to right
     call    UploadFlagAtDe
     ld      de,$424D    ; [66,77]   ; move this to 66 in case you need to release few ins.
     call    UploadFlagAtDe
+
+    IFNDEF NO_LORES_FLAG    ; special variant of test -> switch to ULA mode
+        ; WAIT l=90,h=16
+        ld      de,+(COPPER_WAIT_H<<8)+(16<<9)+90
+        out     (c),d
+        out     (c),e
+        inc     iy
+        ; MOVE SPRITE_CONTROL_NR_15, $00 ; disable LoRes
+        ld      hl,+(SPRITE_CONTROL_NR_15<<8)+$00
+        out     (c),h
+        out     (c),l
+        inc     iy
+    ENDIF
+
     ; do one flag partly over right border
     ld      de,$F85B    ; [248,91]
     call    UploadFlagAtDe
@@ -367,4 +426,8 @@ UploadFlag:
 
     ret
 
+    IFDEF NO_LORES_FLAG     ; special variant of test -> switch to ULA mode
     savesna "!Copper.sna", Start
+    ELSE
+    savesna "LoResCu.sna", Start
+    ENDIF
