@@ -1,0 +1,9 @@
+#!/bin/bash
+# personal script of Ped to launch MAME emulator with the "tbblue.mmc" (or first argument is image filename)
+if [[ -s "$1" ]]; then
+  MMCFILE="$1"
+  shift
+else
+  MMCFILE=tbblue.mmc
+fi
+mame tbblue -ui_active -nounevenstretch -aspect 2:1 -video bgfx -bgfx_screen_chains unfiltered -window -skip_gameinfo -mouse_device none -hard1 "$MMCFILE" "$@"
