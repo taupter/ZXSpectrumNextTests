@@ -616,4 +616,4 @@ im2handler:
         SET_PALETTE_ELEMENT %101'101'10     ; white paper
         ret
 
-    savesna "linesIRQ.sna", Start
+    savesna "linesIRQ.snx", Start

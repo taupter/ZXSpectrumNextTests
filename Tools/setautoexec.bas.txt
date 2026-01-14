@@ -7,14 +7,14 @@
    100 REM run the test
    110 PRINT "Testing ";n;": ";a$ : PAUSE SQR PI : SPECTRUM "d:/a0_dev/tests/"+a$
    499 REM filenames of all tests
-   500 DATA "!Copper.sna",  "!NextReg.sna", "!Z80N.sna",    "!Z80Nc2.sna"
-   510 DATA "CPalTrV2.sna", "CPalTrV3.sna", "CPalTran.sna", "Chg8kB_2.sna"
-   520 DATA "Chg8kBan.sna", "DIHalt.sna",   "DefTrans.sna", "L2Colour.sna"
-   530 DATA "L2Scroll.sna", "LmixLoRs.sna", "Lmix_LxU.sna", "LmxHiCol.sna"
-   540 DATA "LmxHiRes.sna", "SprBig4b.sna", "SpritBig.sna", "SpritRel.sna"
-   550 DATA "SpritTra.sna", "Ula_Pal.sna",  "TFalBUla.sna", "L2Port.sna"
-   560 DATA "SprDelay.sna", "NReg0x69.sna", "UlaScrol.sna", "!dma.sna"
-   570 DATA "zilogDMA.sna", "dmaDebug.sna", "linesIRQ.sna", "int_skip.sna"
+   500 DATA "!Copper.snx",  "!NextReg.snx", "!Z80N.snx",    "!Z80Nc2.snx"
+   510 DATA "CPalTrV2.snx", "CPalTrV3.snx", "CPalTran.snx", "Chg8kB_2.snx"
+   520 DATA "Chg8kBan.snx", "DIHalt.sna",   "DefTrans.snx", "L2Colour.snx"
+   530 DATA "L2Scroll.snx", "LmixLoRs.snx", "Lmix_LxU.snx", "LmxHiCol.snx"
+   540 DATA "LmxHiRes.snx", "SprBig4b.snx", "SpritBig.snx", "SpritRel.snx"
+   550 DATA "SpritTra.snx", "Ula_Pal.snx",  "TFalBUla.snx", "L2Port.snx"
+   560 DATA "SprDelay.snx", "NReg0x69.snx", "UlaScrol.snx", "!dma.snx"
+   570 DATA "zilogDMA.snx", "dmaDebug.snx", "linesIRQ.snx", "int_skip.sna"
    970 REM empty string = terminator
    980 DATA "" : STOP
   1000 LET t=65535 : LET a$=""

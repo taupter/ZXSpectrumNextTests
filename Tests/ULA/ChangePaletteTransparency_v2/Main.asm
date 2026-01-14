@@ -32,4 +32,4 @@ Start:
 
 	call EndTest
 
-	savesna "CPalTrV2.sna", Start
+	savesna "CPalTrV2.snx", Start

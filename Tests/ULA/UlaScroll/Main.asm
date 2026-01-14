@@ -287,4 +287,4 @@ Im2Handler  equ     ((IVT2+1)<<8) + IVT2+1
     ei
     ret
 
-    savesna "UlaScrol.sna", Start
+    savesna "UlaScrol.snx", Start

@@ -619,4 +619,4 @@ DrawDitherGfxInside16x16Box:
     pop     af
     ret
 
-    savesna "L2Colour.sna", Start
+    savesna "L2Colour.snx", Start

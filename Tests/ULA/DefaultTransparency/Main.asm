@@ -29,4 +29,4 @@ Start
 TestTxt:
     db  ' Magenta paper + this text = OK', 0
 
-	savesna "DefTrans.sna", Start
+	savesna "DefTrans.snx", Start

@@ -821,4 +821,4 @@ Im2Handler  equ     ((IVT2+1)<<8) + IVT2+1
     ei
     ret
 
-    savesna "L2Scroll.sna", Start
+    savesna "L2Scroll.snx", Start

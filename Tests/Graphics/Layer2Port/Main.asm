@@ -585,4 +585,4 @@ FillLayer2Banks:
     ret
 
     ASSERT  $ < $E000
-    savesna "L2Port.sna", Start
+    savesna "L2Port.snx", Start

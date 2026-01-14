@@ -27,4 +27,4 @@ Start:
 
 	call EndTest
 
-	savesna "CPalTran.sna", Start
+	savesna "CPalTran.snx", Start

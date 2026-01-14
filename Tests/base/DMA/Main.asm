@@ -510,7 +510,7 @@ Im2Handler:
     ei
     ret
 
-    savesna "!dma.sna", Start
+    savesna "!dma.snx", Start
 
 /*
 Allen info about prescalar:

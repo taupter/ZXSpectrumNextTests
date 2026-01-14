@@ -2,7 +2,7 @@ Source in folder: Tests/Sprites/BigSprite4b/
 
 Does test "big-sprite" relative sprites (feature of core 2.00.27+).
 
-This is almost identical test to SpritBig.sna (Tests/Sprites/BigSprite), except
+This is almost identical test to SpritBig.snx (Tests/Sprites/BigSprite), except
 the graphical patterns are 4-bit and displaying "Golden Wings" item "B" graphics.
 
 The first half (0..127) of pattern slot has original "B" item graphics, the second

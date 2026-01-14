@@ -543,4 +543,4 @@ OutErrValue:
     pop     hl
     jp      OutHexaValue
 
-    savesna "!NextReg.sna", Start
+    savesna "!NextReg.snx", Start

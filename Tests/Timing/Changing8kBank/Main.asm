@@ -77,4 +77,4 @@ TestLoop:
 TestTxt:
     db      '256x 8k switch, contention ON', 0
 
-	savesna "Chg8kBan.sna", Start
+	savesna "Chg8kBan.snx", Start

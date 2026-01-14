@@ -750,7 +750,7 @@ Im2Handler:
     ret
 
     IFNDEF BUILD_TAP
-        savesna "zilogDMA.sna", Start
+        savesna "zilogDMA.snx", Start
     ELSE
         savebin "dma8000.bin", BinStart, $-BinStart
         shellexec "bin2tap -o zilogdma.tap -a 32768 -b -r 32768 dma8000.bin && rm dma8000.bin"

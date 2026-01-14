@@ -364,4 +364,4 @@ LegendaryText_AttribsHandling:
     DB 0
 
     ASSERT  $ < $E000
-    savesna "SprDelay.sna", Start
+    savesna "SprDelay.snx", Start

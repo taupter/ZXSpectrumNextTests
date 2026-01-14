@@ -72,4 +72,4 @@ Start:
     INCLUDE "testsSpecials.i.asm"   ; NEXTREG *r,*n | NEXTREG *r,A | OUTINB | PUSH **
     INCLUDE "testsPixelRelated.i.asm"   ; PIXELDN | PIXELAD | SETAE
 
-    savesna "!Z80N.sna", Start
+    savesna "!Z80N.snx", Start

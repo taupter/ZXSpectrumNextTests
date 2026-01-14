@@ -164,4 +164,4 @@ im2handler:
     ei
     reti
 
-    savesna "Ula_Pal.sna", Start
+    savesna "Ula_Pal.snx", Start

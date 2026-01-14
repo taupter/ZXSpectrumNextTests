@@ -427,7 +427,7 @@ UploadFlag:
     ret
 
     IFDEF NO_LORES_FLAG     ; special variant of test -> switch to ULA mode
-    savesna "!Copper.sna", Start
+    savesna "!Copper.snx", Start
     ELSE
-    savesna "LoResCu.sna", Start
+    savesna "LoResCu.snx", Start
     ENDIF

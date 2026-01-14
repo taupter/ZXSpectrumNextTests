@@ -470,4 +470,4 @@ SpriteLines:
     db  '                               ('  ; 1
     db  0
 
-    savesna "SpritRel.sna", Start
+    savesna "SpritRel.snx", Start

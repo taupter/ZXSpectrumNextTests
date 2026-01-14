@@ -325,4 +325,4 @@ CopperCode:     ;; remember the copper instructions are big endian (bytes: WAIT/
 CopperCodeLength EQU $ - CopperCode
 
     ASSERT  $ < $E000
-    savesna "NReg0x69.sna", Start
+    savesna "NReg0x69.snx", Start

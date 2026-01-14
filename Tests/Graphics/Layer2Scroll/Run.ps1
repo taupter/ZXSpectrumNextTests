@@ -1,7 +1,7 @@
 # CSpect
-&$env:SpectrumEmulatorsPath\CSpect\CSpect.exe $PSScriptRoot\L2Scroll.sna
+&$env:SpectrumEmulatorsPath\CSpect\CSpect.exe $PSScriptRoot\L2Scroll.snx
 
 #ZEsarUX
 cd $env:SpectrumEmulatorsPath\ZEsarUX\
-.\ZEsarUX.exe --noconfigfile --machine tbblue --realvideo --enabletimexvideo --tbblue-fast-boot-mode --sna-no-change-machine --enable-esxdos-handler --nosplash --quickexit $PSScriptRoot\L2Scroll.sna
+.\ZEsarUX.exe --noconfigfile --machine tbblue --realvideo --enabletimexvideo --tbblue-fast-boot-mode --sna-no-change-machine --enable-esxdos-handler --nosplash --quickexit $PSScriptRoot\L2Scroll.snx
 cd $PSScriptRoot

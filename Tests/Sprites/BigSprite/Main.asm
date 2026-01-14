@@ -584,4 +584,4 @@ OrientationLabelsTxt:
 SpriteAttributesBuffer:
     ds      128*5   ; area to prepare sprite attributes ahead, before sending to IO $57
 
-    savesna "SpritBig.sna", Start
+    savesna "SpritBig.snx", Start

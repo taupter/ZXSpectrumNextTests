@@ -2505,7 +2505,7 @@ StackSpace:
     ASSERT $ <= $97FF
 
     IFNDEF BUILD_TAP
-        savesna "dmaDebug.sna", Start
+        savesna "dmaDebug.snx", Start
     ELSE
         savebin "dma8000.bin", BinStart, $-BinStart
         shellexec "bin2tap -o dmaDebug.tap -a 32768 -b -r 32768 dma8000.bin && rm dma8000.bin"

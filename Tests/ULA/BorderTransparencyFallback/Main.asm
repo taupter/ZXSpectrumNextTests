@@ -105,4 +105,4 @@ Phase3Txt:
 PressNTxt:
     db  ' Press "n" to roll phases 1,2,3 ', 0
 
-    savesna "TFalBUla.sna", Start
+    savesna "TFalBUla.snx", Start

@@ -6,11 +6,12 @@ shopt -s globstar nullglob
 mkdir -p release
 unset -v updatedSomeFile
 # for all snapshots in Tests
-for f in Tests/**/*.sna; do
+for f in Tests/**/*.{sna,snx}; do
     echo -n -e "Found snapshot: \e[96m$f\e[0m"
     dirpath=`dirname $f`
     snapname=`basename $f`
     basename=`basename -s .sna $snapname`
+    basename=`basename -s .snx $basename`
     # *MOVE* snapshot into release folder
     # - move, so developer of test can tell if he did refresh the release directory
     #   (but for non-developers the "release" directory should be "everything they need")

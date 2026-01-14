@@ -64,4 +64,4 @@ Start:
     INCLUDE "testsBarrelShifts.i.asm"   ; BRLC | BSLA | BSRA | BSRF | BSRL
     INCLUDE "testsC2specials.i.asm"     ; JP (C)
 
-    savesna "!Z80Nc2.sna", Start
+    savesna "!Z80Nc2.snx", Start

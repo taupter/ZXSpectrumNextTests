@@ -1,7 +1,7 @@
 # CSpect
-&$env:SpectrumEmulatorsPath\CSpect\CSpect.exe $PSScriptRoot\SpritTra.sna
+&$env:SpectrumEmulatorsPath\CSpect\CSpect.exe $PSScriptRoot\SpritTra.snx
 
 #ZEsarUX
 cd $env:SpectrumEmulatorsPath\ZEsarUX\
-.\ZEsarUX.exe --noconfigfile --machine tbblue --realvideo --enabletimexvideo --tbblue-fast-boot-mode --sna-no-change-machine --enable-esxdos-handler --nosplash --quickexit $PSScriptRoot\SpritTra.sna
+.\ZEsarUX.exe --noconfigfile --machine tbblue --realvideo --enabletimexvideo --tbblue-fast-boot-mode --sna-no-change-machine --enable-esxdos-handler --nosplash --quickexit $PSScriptRoot\SpritTra.snx
 cd $PSScriptRoot

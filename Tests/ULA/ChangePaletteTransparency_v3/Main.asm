@@ -37,4 +37,4 @@ Start:
 TestTxt:
     db  'White screen + this text = OK', 0
 
-    savesna "CPalTrV3.sna", Start
+    savesna "CPalTrV3.snx", Start

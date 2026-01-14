@@ -655,4 +655,4 @@ DrawDitherGfxInside16x16Box:
     pop     af
     ret
 
-    savesna "LmxHiRes.sna", Start
+    savesna "LmxHiRes.snx", Start

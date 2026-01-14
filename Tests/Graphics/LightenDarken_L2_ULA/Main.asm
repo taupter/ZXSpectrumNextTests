@@ -916,4 +916,4 @@ DrawDitherGfxInside16x16Box:
     pop     af
     ret
 
-    savesna "Lmix_LxU.sna", Start
+    savesna "Lmix_LxU.snx", Start

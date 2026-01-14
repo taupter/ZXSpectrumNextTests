@@ -81,4 +81,4 @@ Pattern:            ; avoiding index 0 in case some emulator defaults to 0 with 
 	defb $01, $01, $01, $01, $01, $01, $01, $01, $02, $02, $02, $02, $02, $02, $02, $02
 	defb $01, $01, $01, $01, $01, $01, $01, $01, $02, $02, $02, $02, $02, $02, $02, $02
 
-	savesna "SpritTra.sna", Start
+	savesna "SpritTra.snx", Start
