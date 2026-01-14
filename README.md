@@ -13,7 +13,7 @@ Simple test programs for the ZX Spectrum Next (couple of them also for classic Z
  * [Undocumented flags stability after CCF/SCF across frame timing](Tests/ZX48_ZX128/Z80CcfScfOutcomeStability/)
  * [Sinclair Joystick readings invisible at port $00FE vs visible at $EFFE/$F7FE](Tests/ZX48_ZX128/ULAvsSJS/)
 
-# Output
+# Photos and screenshots
 
 ## [base](Tests/base/)
 

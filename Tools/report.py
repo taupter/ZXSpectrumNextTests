@@ -3,7 +3,7 @@ import os
 """
   This script generates markdown-friendly output of testing results for HW and emulators.
 Usage:
-> sed -i '/# Output/q' ../README.md
+> sed -i '/# Photos and screenshots/q' ../README.md
 > python3 report.py >> ../README.md
 """
 
