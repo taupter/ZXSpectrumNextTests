@@ -13,19 +13,10 @@ StartTest:
     ld      (hl),P_WHITE|BLACK
     ld      bc,32*24-1      ; and overwrite remaining 767 bytes
     ldir
-    ; detect if the test is running at TBBlue machine (ZX Next)
-    call    DetectTBBlue
-    ret     nc
-    ; if running at TBBlue, enable all Next specific HW in the NextRegisters $82-$85
-    ld      a,$FF
-    ld      b,INTERNAL_PORT_DECODING_0_NR_82
-    call    WriteNextRegByIo
-    inc     b               ; INTERNAL_PORT_DECODING_1_NR_83
-    call    WriteNextRegByIo
-    inc     b               ; INTERNAL_PORT_DECODING_2_NR_84
-    call    WriteNextRegByIo
-    inc     b               ; INTERNAL_PORT_DECODING_3_NR_85
-    jr      WriteNextRegByIo
+;     ; detect if the test is running at TBBlue machine (ZX Next)
+;     call    DetectTBBlue
+;     ret     nc
+    ret
 
 EndTest
 	jr EndTest	; Loop forever so we can take a screengrab.
