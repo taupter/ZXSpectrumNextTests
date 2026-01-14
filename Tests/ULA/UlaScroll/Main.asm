@@ -1,3 +1,4 @@
+    DEFINE SNA_FILENAME "UlaScrol.snx"
     device zxspectrum48
 
     org     $C000       ; must be in last 16k as I'm using all-RAM mapping for Layer2
@@ -21,6 +22,8 @@ ModesTableNR69:
 XOFS        equ     232
 YOFS        equ     164             ; intentionally over 128 to use "3rd third"
 
+MyNameTxt:
+    DB      " [", SNA_FILENAME, ']', 0
 LegendTxts:
     DB      'ULA Scroll',0
     DB      'NextRegs:',0
@@ -67,9 +70,12 @@ Start:
     NEXTREG_nn CLIP_ULA_LORES_NR_1A,175
     ; ULA will be used classic one, original colours and attributes
     ; draw ULA screen0
-    ld      de,MEM_ZX_SCREEN_4000+$1000+$20*3+15
-    ld      bc,MEM_ZX_SCREEN_4000+$1000+$20*4+15
+    ld      de,MEM_ZX_SCREEN_4000+$1000+$20*3+2
+    ld      bc,MEM_ZX_SCREEN_4000+$1000+$20*4+2
+    ld      ix,$ED01
     call    OutMachineIdAndCore_defLabels
+    ld      hl,MyNameTxt
+    call    OutString
     call    Draw16x16GridWithHexaLabels
     ld      hl,LegendTxts
     ld      de,MEM_ZX_SCREEN_4000+$20*1+19
@@ -287,4 +293,4 @@ Im2Handler  equ     ((IVT2+1)<<8) + IVT2+1
     ei
     ret
 
-    savesna "UlaScrol.snx", Start
+    savesna SNA_FILENAME, Start
