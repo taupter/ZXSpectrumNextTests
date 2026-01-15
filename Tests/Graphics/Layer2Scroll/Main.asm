@@ -171,11 +171,11 @@ InteractiveLoop:
     ld      a,%1111'1110    ; C (bit 3) row
     in      a,(ULA_P_FE)
     bit     3,a
-    jr      nz,InteractiveLoop
-    NEXTREG_nn $18,0        ; switch off clipping
-    NEXTREG_nn $18,255
-    NEXTREG_nn $18,0
-    NEXTREG_nn $18,255
+    jr      nz,InteractiveLoop  ; C not pressed
+    NEXTREG_nn  CLIP_LAYER2_NR_18,0        ; switch off clipping
+    NEXTREG_nn  CLIP_LAYER2_NR_18,255
+    NEXTREG_nn  CLIP_LAYER2_NR_18,0
+    NEXTREG_nn  CLIP_LAYER2_NR_18,255
     FILL_AREA   MEM_ZX_ATTRIB_5800+$20*11+17, 13, P_WHITE|CYAN
     FILL_AREA   MEM_ZX_ATTRIB_5800+$20*12+17, 13, P_WHITE|CYAN
     jr      InteractiveLoop
