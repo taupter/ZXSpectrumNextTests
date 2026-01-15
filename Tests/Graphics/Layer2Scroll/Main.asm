@@ -1,3 +1,4 @@
+    DEFINE SNA_FILENAME "L2Scroll.snx"
     device zxspectrum48
 
     org     $C000       ; must be in last 16k as I'm using all-RAM mapping for Layer2
@@ -307,6 +308,8 @@ SwitchL2Mode:
     djnz    $-1
     ret
 
+MyNameTxt:
+    DB      '[', SNA_FILENAME, ']', 0
 LegendTxts:
     DB      '   Green',0
     DB      '  border:',0
@@ -328,6 +331,9 @@ DrawUlaPart:
     ld      de,MEM_ZX_SCREEN_4000+$1000+$20*3+15
     ld      bc,MEM_ZX_SCREEN_4000+$1000+$20*4+15
     call    OutMachineIdAndCore_defLabels
+    ld      hl,MyNameTxt
+    ld      de,MEM_ZX_SCREEN_4000+$1000+$20*5+14
+    call    OutStringAtDe
     ld      hl,LegendTxts
     ld      de,MEM_ZX_SCREEN_4000+$20*1+17
 .OutputFullLegend:
@@ -821,4 +827,4 @@ Im2Handler  equ     ((IVT2+1)<<8) + IVT2+1
     ei
     ret
 
-    savesna "L2Scroll.snx", Start
+    savesna SNA_FILENAME, Start

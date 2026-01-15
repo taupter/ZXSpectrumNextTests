@@ -1,3 +1,4 @@
+    DEFINE SNA_FILENAME "DefTrans.snx"
 	device zxspectrum48
 
 	org	$6000
@@ -12,6 +13,8 @@ Start
 	call StartTest
     ld   hl,TestTxt
     ld   de,MEM_ZX_SCREEN_4000
+    call OutStringAtDe
+    ld   de,MEM_ZX_SCREEN_4000+16*256+7*32+18
     call OutStringAtDe
 
 	NEXTREG_nn SPRITE_CONTROL_NR_15, %00010100	; Set ULA over Layer2 over sprites, with sprites not visible.
@@ -28,5 +31,6 @@ Start
 
 TestTxt:
     db  ' Magenta paper + this text = OK', 0
+    db  '[', SNA_FILENAME, ']', 0
 
-	savesna "DefTrans.snx", Start
+	savesna SNA_FILENAME, Start

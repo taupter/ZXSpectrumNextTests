@@ -1,3 +1,4 @@
+    DEFINE SNA_FILENAME "CPalTrV3.snx"
     device zxspectrum48
 
     org	$6000
@@ -12,6 +13,8 @@ Start:
     call StartTest
     ld   hl,TestTxt
     ld   de,MEM_ZX_SCREEN_4000
+    call OutStringAtDe
+    ld   de,MEM_ZX_SCREEN_4000+16*256+7*32
     call OutStringAtDe
 
     ; Set ULA over Layer2 over sprites, with sprites not visible.
@@ -36,5 +39,6 @@ Start:
 
 TestTxt:
     db  'White screen + this text = OK', 0
+    db  '[', SNA_FILENAME, ']', 0
 
-    savesna "CPalTrV3.snx", Start
+    savesna SNA_FILENAME, Start

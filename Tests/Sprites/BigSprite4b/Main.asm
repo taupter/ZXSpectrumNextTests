@@ -1,3 +1,4 @@
+    DEFINE SNA_FILENAME "SprBig4b.snx"
     device zxspectrum48
 
 SPRITE_POSX_BASE    equ 26      ; X coordinates are at offset to make "266" fit into byte
@@ -531,6 +532,9 @@ DrawUlaPart:
     ld      ix,$ED01        ; display also extended info after MachineId
     ld      hl,MachineInfoLabels
     call    OutMachineIdAndCore
+    ld      hl,MyNameTxt
+    ld      de,MEM_ZX_SCREEN_4000+8*256+1*32+18
+    call    OutStringAtDe
 
     ; setup ULANext + palette for ULA info graphics
     NEXTREG_nn PALETTE_CONTROL_NR_43, $01   ; select ULA palette 0, ULANext ON
@@ -589,7 +593,10 @@ OrientationLabelsTxt:
     db      '---',0,'--r',0,'-y-',0,'-yr',0
     db      'x--',0,'x-r',0,'xy-',0,'xyr',0
 
+MyNameTxt:
+    db      '[', SNA_FILENAME, ']', 0
+
 SpriteAttributesBuffer:
     ds      128*5   ; area to prepare sprite attributes ahead, before sending to IO $57
 
-    savesna "SprBig4b.snx", Start
+    savesna SNA_FILENAME, Start

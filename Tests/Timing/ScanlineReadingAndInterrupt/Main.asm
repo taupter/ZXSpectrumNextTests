@@ -1,3 +1,4 @@
+    DEFINE SNA_FILENAME "linesIRQ.snx"
     device zxspectrum48
     org     $E000
 
@@ -37,6 +38,8 @@ LegendText:
     DB      "(F# keys are NMI+number)",0
     DW      MEM_ZX_SCREEN_4000+8*256+6*32+1
     DB      "(HDMI ignores V key)",0
+    DW      MEM_ZX_SCREEN_4000+16*256+7*32
+    DB      '[', SNA_FILENAME, ']', 0
     DB      0, 0, 0
 LineLsbVramAdr      EQU     MEM_ZX_SCREEN_4000+4*32+24
 OffsetVramAdr       EQU     MEM_ZX_SCREEN_4000+8*256+2*32+24
@@ -616,4 +619,4 @@ im2handler:
         SET_PALETTE_ELEMENT %101'101'10     ; white paper
         ret
 
-    savesna "linesIRQ.snx", Start
+    savesna SNA_FILENAME, Start

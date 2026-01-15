@@ -1,3 +1,4 @@
+    DEFINE SNA_FILENAME "L2Colour.snx"
     device zxspectrum48
 
     org     $C000       ; must be in last 16k as I'm using all-RAM mapping for Layer2
@@ -47,6 +48,8 @@ colourDefSz equ     $ - colourDef
 
 LegendText:
     db      'Legend', 0
+MyNameTxt:
+    DB      '[', SNA_FILENAME, ']', 0
 
 Start:
     ld      sp,$FFE0
@@ -229,6 +232,9 @@ DrawUlaPart:
     call    OutMachineIdAndCore_defLabels
     ld      hl,LegendText
     ld      de,MEM_ZX_SCREEN_4000 + 4*32 + 23
+    call    OutStringAtDe
+    ld      hl,MyNameTxt
+    ld      de,MEM_ZX_SCREEN_4000+16*256+7*32+18
     call    OutStringAtDe
 
     ; make ULA transparent under other "legend" boxes
@@ -619,4 +625,4 @@ DrawDitherGfxInside16x16Box:
     pop     af
     ret
 
-    savesna "L2Colour.snx", Start
+    savesna SNA_FILENAME, Start

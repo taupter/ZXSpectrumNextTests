@@ -1,3 +1,4 @@
+    DEFINE SNA_FILENAME "SpritTra.snx"
 	device zxspectrum48
 
 	org	$6000
@@ -5,9 +6,14 @@
 	INCLUDE "../../Constants.asm"
 	INCLUDE "../../Macros.asm"
 	INCLUDE "../../TestFunctions.asm"
+    INCLUDE "../../OutputFunctions.asm"
 
 Start:
 	call StartTest
+
+    ld      hl,MyNameTxt
+    ld      de,MEM_ZX_SCREEN_4000+16*256+7*32+18
+    call    OutStringAtDe
 
 	NEXTREG_nn SPRITE_CONTROL_NR_15, %00000001	; Set sprites over Layer2 and ULA and enable sprites.
 	NEXTREG_nn PALETTE_CONTROL_NR_43, $20   ; select sprite palette 0, ULANext off
@@ -62,6 +68,9 @@ LoadPattern:
 	otir                        ; send 256 bytes to $xx5B port (uploads whole pattern)
 	ret
 
+MyNameTxt:
+    db      '[', SNA_FILENAME, ']', 0
+
 ; Sprite is divided into four squares, top left bottom right are coloured index 2, the other two coloured index 1.
 Pattern:            ; avoiding index 0 in case some emulator defaults to 0 with $4B
 	defb $02, $02, $02, $02, $02, $02, $02, $02, $01, $01, $01, $01, $01, $01, $01, $01
@@ -81,4 +90,4 @@ Pattern:            ; avoiding index 0 in case some emulator defaults to 0 with 
 	defb $01, $01, $01, $01, $01, $01, $01, $01, $02, $02, $02, $02, $02, $02, $02, $02
 	defb $01, $01, $01, $01, $01, $01, $01, $01, $02, $02, $02, $02, $02, $02, $02, $02
 
-	savesna "SpritTra.snx", Start
+	savesna SNA_FILENAME, Start

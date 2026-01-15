@@ -1,4 +1,5 @@
     OPT     reset --zxnext --syntax=abfw
+    DEFINE SNA_FILENAME "TFalBUla.snx"
     DEVICE  zxspectrum48
 
     ORG     $8000
@@ -28,6 +29,9 @@ Start:
     ld      de,MEM_ZX_SCREEN_4000 + $1000 + 5*32 + 18
     ld      bc,MEM_ZX_SCREEN_4000 + $1000 + 6*32 + 18
     call    OutMachineIdAndCore_defLabels
+    ld      hl,MyNameTxt
+    ld      de,MEM_ZX_SCREEN_4000+16*256+7*32+17
+    call    OutStringAtDe
     ; display "press n to roll phases" message (it stays the same)
     ld      hl,PressNTxt
     ld      de,MEM_ZX_SCREEN_4000 + 6*32
@@ -105,4 +109,7 @@ Phase3Txt:
 PressNTxt:
     db  ' Press "n" to roll phases 1,2,3 ', 0
 
-    savesna "TFalBUla.snx", Start
+MyNameTxt:
+    db      '[', SNA_FILENAME, ']', 0
+
+    savesna SNA_FILENAME, Start

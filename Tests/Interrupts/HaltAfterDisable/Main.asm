@@ -1,3 +1,4 @@
+    DEFINE SNA_FILENAME "DIHalt.sna"
 	device zxspectrum48
 
 	org	$6000
@@ -9,7 +10,7 @@
 
 Start
 	call StartTest
-	ld     b,4
+	ld     b,5
 	ld     de,MEM_ZX_SCREEN_4000+4
 	ld     hl,LegendaryText
 .printLegendLoop:
@@ -41,5 +42,6 @@ LegendaryText:
     DB  'DI',0
     DB  'HALT',0
     DB  'BORDER RED',0
+    DB  1,SNA_FILENAME,1,0
 
-	savesna "DIHalt.sna", Start
+	savesna SNA_FILENAME, Start

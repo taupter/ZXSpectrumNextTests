@@ -1,3 +1,4 @@
+    DEFINE SNA_FILENAME "NReg0x69.snx"
     device zxspectrum48
 
     org     $C000       ; must be in last 16k as I'm using all-RAM mapping for Layer2
@@ -24,6 +25,9 @@ Start:
     ld      de,MEM_ZX_SCREEN_4000+18
     ld      bc,MEM_ZX_SCREEN_4000+32+18
     call    OutMachineIdAndCore_defLabels
+    ld      de,MEM_ZX_SCREEN_4000+16*256+7*32+18
+    ld      hl,MyNameTxt
+    call    OutStringAtDe
     ;; do the code-only test first and write result on screen after
     BORDER  YELLOW
     ; enable timex port $FF read (disable floating bus), unlock the $7FFD port
@@ -310,6 +314,9 @@ LabelsVisualData:
     DW MEM_ZX_ATTRIB_5800+32*8              : DB 1, 32*3, A_BRIGHT|P_CYAN|CYAN
     DW 0, 0                                 : DB 0  ; attr batch terminator
 
+MyNameTxt:
+    DB      '[', SNA_FILENAME, ']', 0
+
 CopperCode:     ;; remember the copper instructions are big endian (bytes: WAIT/REGISTER, scanline/value)
     DW  $0069   ; at [0,0] switch all off, default ULA classic
     DW  COPPER_WAIT_H|($18<<8), $8069  ; Layer 2 ON, shadow OFF, ULA classic (Timex scr0)
@@ -325,4 +332,4 @@ CopperCode:     ;; remember the copper instructions are big endian (bytes: WAIT/
 CopperCodeLength EQU $ - CopperCode
 
     ASSERT  $ < $E000
-    savesna "NReg0x69.snx", Start
+    savesna SNA_FILENAME, Start

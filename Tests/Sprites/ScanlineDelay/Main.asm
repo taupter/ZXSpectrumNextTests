@@ -1,3 +1,4 @@
+    DEFINE SNA_FILENAME "SprDelay.snx"
     device zxspectrum48
 
     org     $8000
@@ -122,6 +123,8 @@ Start:
     ld      de,MEM_ZX_SCREEN_4000+$800+$20*6
     call    OutStringAtDe
     ld      de,MEM_ZX_SCREEN_4000+$1000+$20*2
+    call    OutStringAtDe
+    ld      de,MEM_ZX_SCREEN_4000+$1000+$20*7+18
     call    OutStringAtDe
     BORDER  CYAN
 
@@ -361,7 +364,8 @@ LegendaryText_AttribsHandling:
     DB  '"ooo1"',0
     DB  'Setup by I/O port "o1":',0
     DB  'Lockstep exercise "11":',0
+    DB  '[', SNA_FILENAME, ']', 0
     DB 0
 
     ASSERT  $ < $E000
-    savesna "SprDelay.snx", Start
+    savesna SNA_FILENAME, Start

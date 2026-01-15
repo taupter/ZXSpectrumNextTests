@@ -8,6 +8,12 @@
         ; Also flag has few half-width pixel stripes to make it well visible,
         ; that palette updates are half-width "live" 4x per LoRes pixel
 
+    IFDEF NO_LORES_FLAG
+        DEFINE SNA_FILENAME "!Copper.snx"
+    ELSE
+        DEFINE SNA_FILENAME "LoResCu.snx"
+    ENDIF
+
     org     $8000
 
     INCLUDE "../../Constants.asm"
@@ -23,6 +29,7 @@ LegendText:
     db      'by PAPER/BORDER 7 colour change.',0
     db      'Flags 16x10 at: [1,64] below ...',0
     db      '[242,118] above ... and more :)',0
+    DB      '[', SNA_FILENAME, ']', 0
 
 CopperBytesTxt:
     db      'Copper ins. (max 0400):   ',0
@@ -92,6 +99,8 @@ Start:
     ld      de,MEM_ZX_SCREEN_4000+5*32
     call    OutStringAtDe
     ld      de,MEM_ZX_SCREEN_4000+6*32
+    call    OutStringAtDe
+    ld      de,MEM_ZX_SCREEN_4000+1*32+12
     call    OutStringAtDe
 
     ; Draw dots for "rulers" to judge Copper precision
@@ -427,7 +436,7 @@ UploadFlag:
     ret
 
     IFDEF NO_LORES_FLAG     ; special variant of test -> switch to ULA mode
-    savesna "!Copper.snx", Start
+    savesna SNA_FILENAME, Start
     ELSE
     savesna "LoResCu.snx", Start
     ENDIF

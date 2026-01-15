@@ -3,6 +3,7 @@
 ; not sure if there's point to share more source between, let's keep it like this for
 ; the moment, then maybe refactor later (there's one more variant pending, Timex-HiRes)
 
+    DEFINE SNA_FILENAME "LmxHiCol.snx"
     device zxspectrum48
 
     org     $C000       ; must be in last 16k as I'm using all-RAM mapping for Layer2
@@ -52,6 +53,8 @@ colourDefSz equ     $ - colourDef
 
 LegendText:
     db      'Legend', 0
+MyNameTxt:
+    DB      '[', SNA_FILENAME, ']', 0
 
 Start:
     ld      sp,$FFE0
@@ -233,6 +236,9 @@ DrawUlaHiColPart:
     call    OutMachineIdAndCore_defLabels
     ld      hl,LegendText
     ld      de,MEM_ZX_SCREEN_4000 + 4*32 + 23
+    call    OutStringAtDe
+    ld      hl,MyNameTxt
+    ld      de,MEM_ZX_SCREEN_4000+16*256+7*32+18
     call    OutStringAtDe
     ; have some fun with machineID + core version attributes in HiCol mode
     FILL_AREA MEM_TIMEX_SCR1_6000 + 1*32 + 17 + 0*256, 14, CI_B_WHITE + (CI_BLACK<<4)
@@ -644,4 +650,4 @@ DrawDitherGfxInside16x16Box:
     pop     af
     ret
 
-    savesna "LmxHiCol.snx", Start
+    savesna SNA_FILENAME, Start

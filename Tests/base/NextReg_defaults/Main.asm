@@ -1,3 +1,4 @@
+    DEFINE SNA_FILENAME "!NextReg.snx"
     device zxspectrum48
 
     org	$6000
@@ -140,6 +141,7 @@ LegendText:
 LegendMachineId:
     db      'MachineID:',0
     db      'core',0
+    db      '[',SNA_FILENAME,']',0
 ReadmeNoticeText:
     db      'For details check: ReadMe.txt',0
 
@@ -485,6 +487,8 @@ DrawLegend:
     ex      de,hl
     call    OutStringAtDe
     djnz    .MachineInfoLabelLoop
+    ld      de,MEM_ZX_SCREEN_4000+$1000+18      ; HL = text "[SNA_FILENAME]"
+    call    OutStringAtDe
     ; draw the general "ReadMe.txt" message at bottom (HL already points at it)
     ld      de,$50C0            ; and HL = ReadmeNoticeText
     call    OutStringAtDe
@@ -543,4 +547,4 @@ OutErrValue:
     pop     hl
     jp      OutHexaValue
 
-    savesna "!NextReg.snx", Start
+    savesna SNA_FILENAME, Start

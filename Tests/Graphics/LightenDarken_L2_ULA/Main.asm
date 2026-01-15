@@ -5,6 +5,7 @@
 ; this test covers only the most simple basic ULA + Layer2 case (not tilemode involved,
 ; no front-non-blend-sub-layer)
 
+    DEFINE SNA_FILENAME "Lmix_LxU.snx"
     device zxspectrum48
 
     org     $C000       ; must be in last 16k as I'm using all-RAM mapping for Layer2
@@ -814,6 +815,8 @@ LayerOrderLabelsTxt:    ; array[X, Y, ASCIIZ], $FF
     ; draw controls legend
     db      $60, $24, "A", 0, $93, $24, "S", 0, $B4, $24, "F", 0, $D0, $24, "D", 0
     db      $24, $24, "Press", 0
+    db      $8C, $B4, '[', SNA_FILENAME, ']', 0
+
     db      $FF
 
 DrawCharLabels:
@@ -916,4 +919,4 @@ DrawDitherGfxInside16x16Box:
     pop     af
     ret
 
-    savesna "Lmix_LxU.snx", Start
+    savesna SNA_FILENAME, Start

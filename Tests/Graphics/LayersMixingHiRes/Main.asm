@@ -3,6 +3,7 @@
 ; not sure if there's point to share more source between, let's keep it like this for
 ; the moment, then maybe refactor later
 
+    DEFINE SNA_FILENAME "LmxHiRes.snx"
     device zxspectrum48
 
     org     $C000       ; must be in last 16k as I'm using all-RAM mapping for Layer2
@@ -605,6 +606,7 @@ LayerOrderLabelsTxt:    ; array[X, Y, ASCIIZ], $FF
     db      $04, $03, "SLU", 0, $04, $23, "LSU", 0, $04, $43, "SUL", 0
     db      $04, $63, "LUS", 0, $04, $83, "USL", 0, $04, $A3, "ULS", 0
     db      $B8, $20, 'Legend', 0
+    DB      $8E, $B8, '[', SNA_FILENAME, ']', 0
     db      $FF
 
 DrawCharLabels:
@@ -655,4 +657,4 @@ DrawDitherGfxInside16x16Box:
     pop     af
     ret
 
-    savesna "LmxHiRes.snx", Start
+    savesna SNA_FILENAME, Start

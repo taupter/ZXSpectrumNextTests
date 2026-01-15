@@ -1,3 +1,4 @@
+    DEFINE SNA_FILENAME "L2Port.snx"
     device zxspectrum48
 
     org     $C000       ; must be in last 16k as I'm using all-RAM mapping for Layer2
@@ -10,6 +11,8 @@ stack:
     INCLUDE "../../TestFunctions.asm"
     INCLUDE "../../OutputFunctions.asm"
 
+MyNameTxt:
+    DB      '[', SNA_FILENAME, ']', 0
 LegendNr12:
     db      ' Visible Layer 2 (NextReg 0x12)', 0
 LegendNr13:
@@ -34,9 +37,12 @@ Start:
     ld      sp,stack
     NEXTREG_nn  TURBO_CONTROL_NR_07,3       ; 28MHz
     call    StartTest
-    ld      de,MEM_ZX_SCREEN_4000+32*8*16+7*32+5    ; bottom right corner
-    ld      bc,MEM_ZX_SCREEN_4000+32*8*16+7*32+19
+    ld      de,MEM_ZX_SCREEN_4000+32*8*16+6*32+6    ; bottom right corner
+    ld      bc,MEM_ZX_SCREEN_4000+32*8*16+6*32+20
     call    OutMachineIdAndCore_defLabels
+    ld      hl,MyNameTxt
+    ld      de,MEM_ZX_SCREEN_4000+32*8*16+7*32+20
+    call    OutStringAtDe
     ;; preparing ULA screen for output
     BORDER  CYAN
     call    OutputLegend
@@ -585,4 +591,4 @@ FillLayer2Banks:
     ret
 
     ASSERT  $ < $E000
-    savesna "L2Port.snx", Start
+    savesna SNA_FILENAME, Start

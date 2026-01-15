@@ -2,6 +2,7 @@
 ; not sure if there's point to share more source between, let's keep it like this for
 ; the moment, then maybe refactor later (there're more variants pending with Timex modes!)
 
+    DEFINE SNA_FILENAME "LmixLoRs.snx"
     device zxspectrum48
 
     org     $C000       ; must be in last 16k as I'm using all-RAM mapping for Layer2
@@ -569,6 +570,7 @@ PrepareSpriteGraphics:
 ;;;;;;;;;;;;;;;;; Draw letter-hints into Layer2 ;;;;;;;;;;;;;;;;;;;
 
 LayerOrderLabelsTxt:    ; array[X, Y, ASCIIZ], $FF
+    DB      $90, $02, '[', SNA_FILENAME, ']', 0
     db      $C4, $34, "S", 0, $C0, $64, "L", 0, $D4, $64, "Lp", 0
     db      $CC, $84, "U", 0, $BC, $94, "LoRes",0
     db      $04, $03, "SLU", 0, $04, $23, "LSU", 0, $04, $43, "SUL", 0
@@ -585,12 +587,12 @@ DrawCharLabels:
 
 .drawMachineId:
     ; draw MachineID and core versions:
-    ld      de,$0800 + 8*21
+    ld      de,$1000 + 8*17 + 4
     ld      a,'m'
     call    OutL2CharIn3ColsAndAdvanceE
     NEXTREG2A MACHINE_ID_NR_00
     call    OutDecimalValueToL2
-    ld      de,$1000 + 8*21
+    ld      de,$1000 + 8*22 + 4
     ld      a,'c'
     call    OutL2CharIn3ColsAndAdvanceE
     NEXTREG2A NEXT_VERSION_NR_01
@@ -669,4 +671,4 @@ DrawDitherGfxInside16x16Box:
     pop     af
     ret
 
-    savesna "LmixLoRs.snx", Start
+    savesna SNA_FILENAME, Start

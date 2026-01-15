@@ -18,6 +18,7 @@
 ;   (current core 3.0.5 is sensitive to this and will malfunction when direction is
 ;   flipped after LOAD)
 
+    DEFINE SNA_FILENAME "!dma.snx"
     device zxspectrum48
 
     org     $8000
@@ -433,7 +434,7 @@ LegendaryText:
     DB  "..\"slow\".burst.18FPS.color.chg.."
     DB  "..auto-restart..2s.CPU.MHz.chg.."
     DB  "................................"
-    DB  "................................"
+    DB  "....................[",SNA_FILENAME,"].."
     DB  "-= 3.5  7  14  28 MHz -==-==-==-"
     DB  0
 
@@ -510,7 +511,7 @@ Im2Handler:
     ei
     ret
 
-    savesna "!dma.snx", Start
+    savesna SNA_FILENAME, Start
 
 /*
 Allen info about prescalar:

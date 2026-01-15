@@ -1,3 +1,4 @@
+    DEFINE SNA_FILENAME "SpritRel.snx"
     device zxspectrum48
 
     org    $7D00
@@ -377,6 +378,9 @@ DrawUlaPart:
     ld      bc,MEM_ZX_SCREEN_4000+16*256+7*32
     ld      ix,$ED01        ; display also extended info after MachineId
     call    OutMachineIdAndCore_defLabels
+    ld      hl,MyNameTxt
+    ld      de,MEM_ZX_SCREEN_4000+16*256+7*32+12
+    call    OutStringAtDe
 
     ; setup ULANext + palette for ULA info graphics
     NEXTREG_nn PALETTE_CONTROL_NR_43, $01   ; select ULA palette 0, ULANext ON
@@ -415,6 +419,9 @@ DrawUlaPart:
     call    OutStringAtDe
     NEXTREG_nn MMU1_2000_NR_51, $FF         ; restore ROM in MMU1
     ret
+
+MyNameTxt:
+    db      '[', SNA_FILENAME, ']', 0
 
 SpriteLabels:
     ;    2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7
@@ -470,4 +477,4 @@ SpriteLines:
     db  '                               ('  ; 1
     db  0
 
-    savesna "SpritRel.snx", Start
+    savesna SNA_FILENAME, Start
