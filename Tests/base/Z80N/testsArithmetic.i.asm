@@ -134,6 +134,10 @@ TestFull_MulDE:
     ret                 ; terminate test
 
 ;;;;;;;;;;;;;;;;;;;;;;;; Test ADD BC,A (a bit more than 1:20) ;;;;;;;;;;;;;;;;;;
+
+; VHDL note - tmp(16) (CF for ADD r16,a) is temporary signal so it is expected to be always 0
+; there's some almost non-existent chance it will become real carry from adder in future, so "undefined" right now
+
 TestFull_AddBcA:
     INIT_HEARTBEAT_256
     push    ix
