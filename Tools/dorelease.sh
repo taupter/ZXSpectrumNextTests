@@ -12,10 +12,10 @@ for f in Tests/**/*.{sna,snx}; do
     snapname=`basename $f`
     basename=`basename -s .sna $snapname`
     basename=`basename -s .snx $basename`
-    # *MOVE* snapshot into release folder
-    # - move, so developer of test can tell if he did refresh the release directory
-    #   (but for non-developers the "release" directory should be "everything they need")
-    mv $f release/$snapname
+    # *COPY* snapshot into release folder
+    # - copy, after some years of experience it turns out it's just burden to search
+    #   for binary in release dir if you are looking at source in git repository
+    cp $f release/$snapname
     # check if "ReadMe.txt" exists and copy it under <snapshot-base-name>.txt into release
     for readme in $dirpath/{ReadMe,readme,README,Readme}.{txt,TXT} ; do
         [[ -e $readme ]] && cp $readme release/$basename.txt \
